@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<!--
+    Made by Muun#1000
+-->
+<html>
+<head>
+    <title>game</title>
+</head>
+<body>
+    <h1 id="pointsText" class="unselectable">Cookies: 0</h1>
+    <h2 id="timeText" class="unselectable">Per second: 0</h2>
+    <canvas id="game" width="1280" height="320">
+    </canvas>
+    <div id="level1" class="option unselectable">
+        <p id="text">Level 1: Baker</p><button class="btn" id="level1baker" onclick="btn()">buy</button>
+    </div>
+    <br class="unselectable">
+    <div id="faclevel" class="option unselectable">
+        <p id="text2">Level 1: Factory</p><button class="btn" id="faclevels" onclick="facbtn()">buy</button>
+    </div>
+    <p class="unselectable" id="plus">+1</p>
+    <h2 class="unselectable" id="aplus">+1</h2>
+
+</body>
+<script>
+    var c = document.getElementById("game");
+    var ctx = c.getContext("2d");
+    let evt = window.event;
+    let level1_baker = false;
+    let points = 0;
+    let worker_value = 1;
+    let faclevel = 1;
+    let duration = 3000; // ms
+
+    document.getElementById('plus').style.display='none'
+    document.getElementById('aplus').style.display='none'
+
+
+    let COOKIE_HEIGHT = 550;
+    let COOKIE_WIDTH = 200;
+    let text = "🍪";
+
+
+    function drawMiniCookie() {
+        ctx.font = "150px Arial";
+        ctx.fillText(text, COOKIE_HEIGHT,COOKIE_WIDTH);
+}
+
+    drawMiniCookie();
+
+    document.addEventListener('click', function(click) {
+        points = points += 1
+        document.getElementById("pointsText").innerText = `Cookies: ${points}`
+        let element = document.getElementById('plus');
+        if(element.style.display == "none") {
+            document.getElementById('plus').style.display='initial'
+            element.style.position = "absolute"
+            element.style.top = click.clientY / 1.2 + "px";
+            element.style.left = click.clientX + "px";
+            console.log(element.style.top,  element.style.left)
+            setTimeout(() => {
+                document.getElementById('plus').style.display='none'
+            }, 100);
+        }
+    });
+
+    function btn() {
+        let button_id = document.getElementById("level1baker");
+
+        if(worker_value == 1) {
+            if(points >= 25) {
+                points = points -= 25
+                worker_value = worker_value += 1;
+                document.getElementById("text").innerText = "Level 2: Baker"
+                level1_baker = true;
+            } else if(points < 25) {
+                alert("Not enough Cookies!")
+            }
+        } else if(worker_value == 2) {
+            if(points >= 100) {
+                points = points -= 100
+                worker_value = worker_value += 1;
+                document.getElementById("text").innerText = "Level 3: Baker"
+                setTimeout(() => {
+                    level1_baker = true;
+                }, 1000);
+            } else if(points < 100) {
+                alert("Not enough Cookies!")
+            }
+        } else if(worker_value == 3) {
+            if(points >= 500) {
+                points = points -= 500
+                worker_value = worker_value += 1;
+                document.getElementById("text").innerText = "Level 4: Baker"
+                setTimeout(() => {
+                    level1_baker = true;
+                }, 1000);
+            } else if(points < 500) {
+                alert("Not enough Cookies!")
+            }
+    } else if(worker_value == 4) {
+            if(points >= 1000) {
+                points = points -= 1000
+                worker_value = worker_value += 1;
+                document.getElementById("text").innerText = "Level 5: Baker"
+                setTimeout(() => {
+                    level1_baker = true;
+                }, 1000);
+            } else if(points < 1000) {
+                alert("Not enough Cookies!")
+            }
+    } else if(worker_value == 5) {
+            if(points >= 5000) {
+                points = points -= 5000
+                worker_value = worker_value += 1;
+                document.getElementById("text").innerText = "Maxed: Baker"
+                document.getElementById("level1baker").style.display = "none";
+                setTimeout(() => {
+                    level1_baker = true;
+                }, 1000);
+            } else if(points < 5000) {
+                alert("Not enough Cookies!")
+            }
+    }
+}
+
+        setInterval(() => {
+            if(level1_baker == true && worker_value == 1) {
+                let element = document.getElementById('aplus')
+                element.style.display='initial'
+                points = points += 1;
+                element.innerText = "+1";
+                element.style.top = "1260px";
+                element.style.left = "332.5px";
+                let elem3 = document.getElementById("timeText");
+            } else if(worker_value == 2) {
+                let element = document.getElementById('aplus')
+                element.style.display='initial';
+                element.style.position = "absolute"
+                element.innerText = "+10";
+                element.style.top = "187.5px";
+                element.style.left = "747px";
+                points = points += 10;
+                let elem3 = document.getElementById("timeText");
+                let eq = duration / 1000;
+                elem3.innerText = "Per second: " + 10 / eq;
+                setTimeout(() => {
+                    element.style.display='none';
+                }, 400);
+            } else if(worker_value == 3) {
+                let element = document.getElementById('aplus')
+                element.style.display='initial';
+                element.style.position = "absolute"
+                element.innerText = "+50";
+                element.style.top = "187.5px";
+                element.style.left = "747px";
+                points = points += 50;
+                let elem3 = document.getElementById("timeText");
+                let eq = duration / 1000;
+                elem3.innerText = "Per second: " + 50 / eq;
+                setTimeout(() => {
+                    element.style.display='none';
+                }, 500);
+            } else if(worker_value == 4) {
+                let element = document.getElementById('aplus')
+                element.style.display='initial';
+                element.style.position = "absolute"
+                element.innerText = "+100";
+                element.style.top = "187.5px";
+                element.style.left = "747px";
+                points = points += 100;
+                let elem3 = document.getElementById("timeText");
+                let eq = duration / 1000;
+                elem3.innerText = "Per second: " + 100 / eq;
+                setTimeout(() => {
+                    element.style.display='none';
+                }, 500);
+            } else if(worker_value == 5) {
+                let element = document.getElementById('aplus')
+                element.style.display='initial';
+                element.style.position = "absolute"
+                element.innerText = "+250";
+                element.style.top = "187.5px";
+                element.style.left = "747px";
+                points = points += 250;
+                let elem3 = document.getElementById("timeText");
+                let eq = duration / 1000;
+                elem3.innerText = "Per second: " + 250 / eq;
+                setTimeout(() => {
+                    element.style.display='none';
+                }, 500);
+            } else if(worker_value == 6) {
+                let element = document.getElementById('aplus')
+                element.style.display='initial';
+                element.style.position = "absolute"
+                element.innerText = "+500";
+                element.style.top = "187.5px";
+                element.style.left = "747px";
+                points = points += 500;
+                let elem3 = document.getElementById("timeText");
+                let eq = duration / 1000;
+                elem3.innerText = "Per second: " + 500 / eq;
+                setTimeout(() => {
+                    element.style.display='none';
+                }, 400);
+            }
+            document.getElementById("pointsText").innerText = `Cookies: ${points}`
+        }, duration);
+
+
+        function facbtn() {
+            if(faclevel == 1 && points >= 10000) {
+                points = points - 10000;
+                duration = duration - 1500;
+                faclevel = faclevel + 1;
+                let facT = document.getElementById("text2")
+                facT.innerText = "Level 2: Factory"
+            } else if(faclevel == 2 && points >= 50000) {
+                points = points - 50000;
+                duration = duration - 500;
+                faclevel = faclevel + 1;
+                let facT = document.getElementById("text2")
+                facT.innerText = "Level 3: Factory"
+            } else if(faclevel == 3 && points >= 100000) {
+                points = points - 100000;
+                duration = duration - 500;
+                faclevel = faclevel + 1;
+                let facT = document.getElementById("text2")
+                facT.innerText = "Maxed: Factory"
+            }
+        }
+</script>
+<style>
+    body {
+        font-family: "Poppins",sans-serif;
+        background: rgb(26, 10, 0);
+        color: #fff;
+    }
+
+    .canvasBorder {
+        border: 2px solid #fff;
+        border-radius: 15px;
+    }
+
+    .unselectable {
+        -webkit-user-select: none;
+        -webkit-touch-callout: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        color: #fff;
+      }
+
+      .option {
+        text-align: right;
+      }
+
+      .btn {
+        border: 2px solid #fff;
+        border-radius: 15px;
+        padding: .5rem .75rem;
+        font-size: 1rem;
+        font-weight: 600;
+      }
+
+
+</style>
+</html>
