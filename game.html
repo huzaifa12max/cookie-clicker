@@ -9,18 +9,37 @@
 <body>
     <h1 id="pointsText" class="unselectable">Cookies: 0</h1>
     <h2 id="timeText" class="unselectable">Per second: 0</h2>
-    <canvas id="game" width="1280" height="320">
+    <canvas class="unselectable" id="game" width="1280" height="320">
     </canvas>
     <div id="level1" class="option unselectable">
         <p id="text">Level 1: Baker</p><button class="btn" id="level1baker" onclick="btn()">buy</button>
     </div>
-    <br class="unselectable">
     <div id="faclevel" class="option unselectable">
         <p id="text2">Level 1: Factory</p><button class="btn" id="faclevels" onclick="facbtn()">buy</button>
     </div>
     <p class="unselectable" id="plus">+1</p>
     <h2 class="unselectable" id="aplus">+1</h2>
-
+    <br class="unselectable"><br class="unselectable"><br class="unselectable"><br class="unselectable"><br class="unselectable"><br class="unselectable">
+    <center><h1 class="unselectable">Factories</h1></center>
+    <center>
+        <div class="ch unselectable">
+            <div id="card1" class="card">
+                <center><img class="unselectable" src="https://img.icons8.com/pastel-glyph/2x/factory.png" height="100" width="100" />
+                <h2>Level: 1</h2>
+                <h2>Income: x2</h2></center>
+            </div>
+            <div id="card2" class="card">
+                <center><img class="unselectable" src="https://img.icons8.com/pastel-glyph/2x/factory.png" height="100" width="100" />
+                <h2>Level: 2</h2>
+                <h2>Income: x10</h2></center>
+            </div>
+            <div id="card3" class="card">
+                <center><img class="unselectable" src="https://img.icons8.com/pastel-glyph/2x/factory.png" height="100" width="100" />
+                <h2>Level: 3</h2>
+                <h2>Income: x20</h2></center>
+            </div>
+        </div>
+    </center>
 </body>
 <script>
     var c = document.getElementById("game");
@@ -31,9 +50,13 @@
     let worker_value = 1;
     let faclevel = 1;
     let duration = 3000; // ms
+    let earnings = 0;
 
     document.getElementById('plus').style.display='none'
     document.getElementById('aplus').style.display='none'
+    document.getElementById('card1').style.visibility='hidden'
+    document.getElementById('card2').style.visibility='hidden'
+    document.getElementById('card3').style.visibility='hidden'
 
 
     let COOKIE_HEIGHT = 550;
@@ -57,7 +80,6 @@
             element.style.position = "absolute"
             element.style.top = click.clientY / 1.2 + "px";
             element.style.left = click.clientX + "px";
-            console.log(element.style.top,  element.style.left)
             setTimeout(() => {
                 document.getElementById('plus').style.display='none'
             }, 100);
@@ -141,9 +163,8 @@
                 element.style.top = "187.5px";
                 element.style.left = "747px";
                 points = points += 10;
-                let elem3 = document.getElementById("timeText");
                 let eq = duration / 1000;
-                elem3.innerText = "Per second: " + 10 / eq;
+                earnings = 10 / eq
                 setTimeout(() => {
                     element.style.display='none';
                 }, 400);
@@ -155,9 +176,8 @@
                 element.style.top = "187.5px";
                 element.style.left = "747px";
                 points = points += 50;
-                let elem3 = document.getElementById("timeText");
                 let eq = duration / 1000;
-                elem3.innerText = "Per second: " + 50 / eq;
+                earnings = 50 / eq;
                 setTimeout(() => {
                     element.style.display='none';
                 }, 500);
@@ -169,9 +189,8 @@
                 element.style.top = "187.5px";
                 element.style.left = "747px";
                 points = points += 100;
-                let elem3 = document.getElementById("timeText");
                 let eq = duration / 1000;
-                elem3.innerText = "Per second: " + 100 / eq;
+                earnings = 100 / eq
                 setTimeout(() => {
                     element.style.display='none';
                 }, 500);
@@ -183,9 +202,8 @@
                 element.style.top = "187.5px";
                 element.style.left = "747px";
                 points = points += 250;
-                let elem3 = document.getElementById("timeText");
                 let eq = duration / 1000;
-                elem3.innerText = "Per second: " + 250 / eq;
+                earnings = 250 / eq
                 setTimeout(() => {
                     element.style.display='none';
                 }, 500);
@@ -197,13 +215,14 @@
                 element.style.top = "187.5px";
                 element.style.left = "747px";
                 points = points += 500;
-                let elem3 = document.getElementById("timeText");
                 let eq = duration / 1000;
-                elem3.innerText = "Per second: " + 500 / eq;
+                earnings = 500 / eq;
                 setTimeout(() => {
                     element.style.display='none';
                 }, 400);
             }
+                let elem3 = document.getElementById("timeText");
+                elem3.innerText = "Per second: " + earnings;
             document.getElementById("pointsText").innerText = `Cookies: ${points}`
         }, duration);
 
@@ -213,24 +232,44 @@
                 points = points - 10000;
                 duration = duration - 1500;
                 faclevel = faclevel + 1;
-                let facT = document.getElementById("text2")
-                facT.innerText = "Level 2: Factory"
-            } else if(faclevel == 2 && points >= 50000) {
-                points = points - 50000;
-                duration = duration - 500;
-                faclevel = faclevel + 1;
-                let facT = document.getElementById("text2")
-                facT.innerText = "Level 3: Factory"
-            } else if(faclevel == 3 && points >= 100000) {
+                let facT = document.getElementById("text2");
+                facT.innerText = "Level 2: Factory";
+                document.getElementById('card1').style.visibility = "visible";
+            } else if(faclevel == 2 && points >= 100000 && duration == 1500) {
                 points = points - 100000;
                 duration = duration - 500;
                 faclevel = faclevel + 1;
+                let facT = document.getElementById("text2");
+                facT.innerText = "Level 3: Factory";
+                document.getElementById('card2').style.visibility = "visible";
+            } else if(faclevel == 3 && points >= 1000000) {
+                points = points - 1000000;
+                duration = duration - 500;
+                faclevel = faclevel + 1;
                 let facT = document.getElementById("text2")
-                facT.innerText = "Maxed: Factory"
+                facT.innerText = "Maxed: Factory";
+                document.getElementById('card3').style.visibility = "visible";
+                document.getElementById("faclevels").style.visibility = "hidden";
             } else {
-                alert("Not enough Cookies!")
+                alert("Not enough Cookies!");
             }
         }
+
+        setInterval(() => {
+            if(faclevel == 2) {
+                let eq = duration / 1000;
+                earnings = earnings * 2;
+                points = points + earnings * eq;
+            } else if(faclevel == 3) {
+                let eq = duration / 1000;
+                earnings = earnings * 10;
+                points = points + earnings / eq;
+            } else if(faclevel == 4) {
+                let eq = duration / 1000;
+                earnings = earnings * 20;
+                points = points + earnings / eq;
+            }
+        }, duration);
 </script>
 <style>
     body {
@@ -259,12 +298,23 @@
 
       .btn {
         border: 2px solid #fff;
+        color: #000;
         border-radius: 15px;
         padding: .5rem .75rem;
         font-size: 1rem;
         font-weight: 600;
       }
 
+      .card {
+        background: #fff;
+        border-radius: 15px;
+        padding: 1rem 1rem;
+        color: #000;
+        margin-right: 1rem;
+      }
 
+      .ch {
+        display: -webkit-box;
+      }
 </style>
 </html>
